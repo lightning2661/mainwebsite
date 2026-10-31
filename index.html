@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mrinmoy Bhattacharjee, AI-robotics builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&family=Albert+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050506;--surface:#0D0E12;--ink:#ECEDF2;--mute:#8E93A3;--a1:#FFB020;--a2:#FF4D8D;--a3:#46E6FF;--line:rgba(236,237,242,.16);--grid:rgba(236,237,242,.045);--serif:"STIX Two Text",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:400 1.0625rem/1.6 "Albert Sans",system-ui,sans-serif;color:var(--ink);background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px;animation:drift 90s linear infinite;overflow-x:hidden}
+@keyframes drift{to{background-position:56px 56px,56px 56px}}
+a{color:inherit}
+a:focus-visible,input:focus-visible{outline:2px solid var(--a3);outline-offset:3px}
+#bg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#pg{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;background:linear-gradient(90deg,var(--a3),var(--a1),var(--a2));transform:scaleX(0);transform-origin:left;z-index:5}
+main{position:relative;z-index:1}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.1rem,4vw,2rem)}
+.sec{padding:clamp(3.5rem,9vw,6.5rem) 0}
+p{max-width:62ch;margin:0 0 1rem}
+h2{font:600 clamp(1.9rem,4.6vw,3.1rem)/1.1 var(--serif);letter-spacing:-.01em;margin:0 0 .5rem;max-width:20ch}
+h3{font:600 1.3rem/1.2 var(--serif);margin:0 0 .35rem}
+.sq{display:block;width:150px;height:12px;margin:0 0 1.6rem;fill:none;stroke:var(--a1);stroke-width:2;stroke-linecap:round}
+.sq path{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s ease .2s}
+.sq.in path{stroke-dashoffset:0}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.nav{display:flex;flex-wrap:wrap;gap:1.4rem;padding-top:1.4rem;font-weight:500}
+.nav a{text-decoration:none;color:var(--mute);background:linear-gradient(var(--a1),var(--a1)) 0 100%/0 2px no-repeat;transition:background-size .3s,color .3s;padding-bottom:3px}
+.nav a:hover{color:var(--ink);background-size:100% 2px}
+.hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:2.5rem;align-items:center;min-height:min(76vh,700px);padding:2.5rem 0}
+h1{font:600 clamp(2.6rem,7vw,5rem)/.98 var(--serif);letter-spacing:-.02em;margin:0 0 1.3rem}
+.ln{display:block;overflow:hidden;padding-bottom:.1em}
+.ln>span{display:block;transform:translateY(112%);animation:up 1.1s cubic-bezier(.2,.8,.2,1) .2s forwards}
+.ln+.ln>span{animation-delay:.38s}
+@keyframes up{to{transform:none}}
+.fi{opacity:0;animation:fade .9s ease forwards;animation-delay:var(--d,.8s)}
+@keyframes fade{to{opacity:1}}
+.lede{font-size:1.2rem;max-width:34em}
+.eq{font:italic 1.4rem/1.3 var(--serif);color:var(--a1);min-height:1.9rem;margin-bottom:1.6rem}
+.car{display:inline-block;width:2px;height:1.1em;background:var(--a1);vertical-align:-.15em;margin-left:3px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn{display:inline-block;padding:.75rem 1.4rem;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;text-decoration:none;margin:0 .6rem .6rem 0;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.btn:hover{transform:translateY(-2px);border-color:var(--a1)}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn.pri:hover{background:var(--a1);color:var(--bg)}
+.btn.sec2:hover{color:var(--a1)}
+.stage{margin:0}
+#epi{width:100%;aspect-ratio:1/1;display:block}
+.ctl{display:flex;gap:.8rem;align-items:center;font-weight:500;margin-top:.4rem}
+.ctl input{flex:1;accent-color:var(--a1);min-width:0}
+.ctl output{font:italic 600 1.2rem var(--serif);min-width:1.2em;color:var(--a1)}
+figcaption{font-size:.92rem;color:var(--mute);margin-top:.3rem;max-width:44ch}
+.stats{list-style:none;margin:1rem 0 0;padding:1.6rem 0 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.stats li{padding:0 1.1rem;border-left:1px solid var(--line)}
+.stats li:first-child{padding-left:0;border-left:0}
+.num{font:600 2.3rem/1 var(--serif);color:var(--a3);display:block;margin-bottom:.35rem}
+.stats small{font-size:.92rem;color:var(--mute);display:block;line-height:1.35}
+.wave{height:36px;background:var(--a3);opacity:.55;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='36' viewBox='0 0 120 36'%3E%3Cpath d='M0 18C20-2 40-2 60 18S100 38 120 18' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") 0 0/120px 36px repeat-x;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='36' viewBox='0 0 120 36'%3E%3Cpath d='M0 18C20-2 40-2 60 18S100 38 120 18' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") 0 0/120px 36px repeat-x;animation:wv 7s linear infinite}
+@keyframes wv{to{-webkit-mask-position:120px 0;mask-position:120px 0}}
+.intro{color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem;margin-top:2rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem 1.3rem}
+.card.in:hover{transform:translateY(-5px);border-color:var(--a3);transition-duration:.3s}
+.card p{margin:0 0 .6rem;font-size:.98rem}
+.plot{width:100%;height:96px;display:block;margin-bottom:.9rem;border-radius:8px;background:var(--bg)}
+.sig{font:italic 1.08rem/1.35 var(--serif);color:var(--mute)}
+.arg{color:var(--a2)}.res{color:var(--a1);font-weight:600}
+.kit{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+.chips{list-style:none;margin:.8rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{border:1px solid var(--line);background:var(--surface);padding:.35rem .85rem;border-radius:999px;font-size:.95rem;animation:bob 5s ease-in-out infinite;transition:border-color .2s,color .2s}
+.chip:hover{border-color:var(--a2);color:var(--a2)}
+.chip:nth-child(3n){animation-delay:-1.3s}.chip:nth-child(3n+1){animation-delay:-2.7s}.chip:nth-child(5n){animation-delay:-.6s}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.bg2{margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--line);color:var(--mute)}
+.bg2 b{color:var(--ink);font-weight:600}
+.contact{display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center}
+.mail{display:inline-block;font:600 clamp(1.15rem,3.4vw,1.8rem) var(--serif);text-decoration:none;color:var(--a3);background:linear-gradient(var(--a3),var(--a3)) 0 100%/100% 2px no-repeat;transition:background-size .4s;padding-bottom:4px;overflow-wrap:anywhere}
+.mail:hover{background-size:0 2px}
+.euler{display:block;width:170px;height:170px;margin:0 auto}
+.euler .ax{fill:none;stroke:var(--line);stroke-width:1.5}
+.euler .rad{stroke:var(--a3);stroke-width:2.5}
+.euler .pt{fill:var(--a2)}
+.spin{transform-origin:80px 80px;animation:spin 9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fm{font:italic 1.1rem var(--serif);text-align:center;color:var(--mute);margin:.5rem auto 0}
+footer{padding:2rem 0 3rem;color:var(--mute);font-size:.95rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+@media (max-width:860px){.hgrid{grid-template-columns:1fr}.kit{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr;row-gap:1.4rem}.stats li:nth-child(3){padding-left:0;border-left:0}.contact{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ln>span{transform:none}.fi,.rv{opacity:1;transform:none}.sq path{stroke-dashoffset:0}}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(55rem 38rem at 88% -8%,rgba(70,230,255,.11),transparent 62%),radial-gradient(48rem 36rem at -8% 45%,rgba(255,77,141,.07),transparent 60%),radial-gradient(40rem 30rem at 60% 105%,rgba(255,176,32,.07),transparent 60%)}
+.ln>span{background:linear-gradient(100deg,var(--ink) 15%,var(--a3) 55%,var(--a1) 90%) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:up 1.1s cubic-bezier(.2,.8,.2,1) .2s forwards,sheen 8s ease-in-out 1.4s infinite alternate}
+@keyframes sheen{to{background-position:100% 0}}
+.eq{font:500 1.05rem/1.3 var(--mono)}
+.eq::before{content:">>> ";color:var(--mute)}
+.stage{margin:0;border:1px solid var(--line);border-radius:14px;background:rgba(13,14,18,.78);padding:0 1rem 1rem;box-shadow:0 0 70px rgba(70,230,255,.08)}
+.bar{display:flex;gap:.45rem;align-items:center;padding:.8rem 0;font:500 .8rem var(--mono);color:var(--mute)}
+.bar i{width:10px;height:10px;border-radius:50%;background:var(--a2)}.bar i:nth-child(2){background:var(--a1)}.bar i:nth-child(3){background:var(--a3)}.bar span{margin-left:.6rem}
+.ctl{font:500 .9rem var(--mono)}
+.card .sig{font:500 .84rem/1.55 var(--mono);color:var(--mute);background:var(--bg);border-radius:8px;padding:.6rem .8rem;overflow-wrap:anywhere}
+.sig b{color:var(--a3);font-weight:500}
+.chip{font:500 .84rem var(--mono)}
+.labgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:1.2rem;margin-top:1.8rem}
+.term pre{margin:0;font:500 .86rem/1.75 var(--mono);white-space:pre-wrap;min-height:14rem}
+.term pre span{display:block;opacity:0}
+.term.in pre span{animation:fade .3s forwards;animation-delay:calc(var(--k)*.4s + .3s)}
+.term b{color:var(--a1);font-weight:500}
+.term em{font-style:normal;color:var(--a3);display:inline-block;width:5.2rem}
+#adc{width:100%;height:210px;display:block}
+.bits{font:500 .9rem/1.6 var(--mono);color:var(--a1);word-spacing:.4em;min-height:3.2rem;overflow-wrap:anywhere;margin:.2rem 0 .6rem}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.feat{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;padding:2rem clamp(1.2rem,3vw,2.4rem);border:2px solid transparent;border-radius:18px;margin:1.8rem 0 1.2rem;background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from var(--ang),var(--a3),var(--a1),var(--a2),var(--a3)) border-box;animation:rot 6s linear infinite}
+@keyframes rot{to{--ang:360deg}}
+.feat h3{font-size:clamp(1.7rem,4.2vw,2.6rem);margin:.7rem 0 .2rem}
+.feat p{margin:0;color:var(--mute)}
+.meter{display:flex;gap:6px;align-items:flex-end;height:52px}
+.meter i{width:11px;height:100%;border-radius:3px;background:var(--line);transform-origin:bottom;animation:lit 2.6s ease-in-out infinite;animation-delay:calc(var(--n)*.13s)}
+@keyframes lit{0%,55%,100%{background:var(--line);transform:scaleY(.45)}25%{background:var(--a1);transform:scaleY(1)}}
+.ach{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.bd{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.3rem;min-height:178px}
+.bd::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(220px circle at var(--mx,-99px) var(--my,-99px),rgba(70,230,255,.18),transparent 70%)}
+.bd:hover::after{opacity:1}
+.bd.in:hover{transform:translateY(-4px);border-color:var(--a3);transition-duration:.3s}
+.bd h3{position:relative;font-size:1.2rem}
+.bd p{position:relative;margin:0;color:var(--mute);font-size:.95rem}
+.yw{position:absolute;right:.9rem;top:.3rem;font:600 4.4rem/1 var(--serif);color:transparent;-webkit-text-stroke:1px var(--line);transition:-webkit-text-stroke-color .3s;pointer-events:none}
+.bd:hover .yw{-webkit-text-stroke-color:var(--a3)}
+.tag{display:inline-block;font:700 .75rem var(--mono);padding:.2rem .6rem;border-radius:6px;margin-bottom:.8rem;background:rgba(70,230,255,.12);color:var(--a3);position:relative}
+.tag.w{background:rgba(255,176,32,.14);color:var(--a1)}
+.tag.p{background:rgba(255,77,141,.14);color:var(--a2)}
+@media (max-width:860px){.labgrid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.term pre span{opacity:1!important}}
+.also{margin:1.6rem 0 0;color:var(--mute);font-size:.95rem}.also b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="pg"></div>
+<main>
+<header class="wrap">
+  <nav class="nav fi" style="--d:.5s" aria-label="Sections"><a href="#work">Work</a><a href="#lab">Lab</a><a href="#recognition">Recognition</a><a href="#toolkit">Toolkit</a><a href="#contact">Contact</a></nav>
+  <div class="hgrid">
+    <div>
+      <h1 aria-label="Mrinmoy Bhattacharjee"><span class="ln"><span>Mrinmoy</span></span><span class="ln"><span>Bhattacharjee</span></span></h1>
+      <p class="lede fi" style="--d:.9s">I love computers: Arch Linux, Raspberry Pis and a soldering iron. I use maths to turn them into robots, sensors and learning systems for problems people actually have, from floods and earthquakes to disability and health. I’m a first-year B.Tech student at SRM Institute of Science and Technology.</p>
+      <p class="eq" aria-label="def f of problem, return prototype"><span id="eq"></span><span class="car"></span></p>
+      <div class="fi" style="--d:1.2s"><a class="btn pri" href="#work">See the work</a><a class="btn sec2" href="mailto:mrinmoybhattacharjee145@gmail.com">Email me</a></div>
+    </div>
+    <figure class="stage fi" style="--d:.3s">
+      <div class="bar"><i></i><i></i><i></i><span>fourier.py</span></div>
+      <canvas id="epi" role="img" aria-label="Rotating circles tracing a closed curve"></canvas>
+      <label class="ctl" for="n">n_circles = <input id="n" type="range" min="1" max="8" value="6"><output id="nout" for="n">6</output></label>
+      <figcaption>Spinning circles added together trace this curve. Change n_circles and the program redraws it live.</figcaption>
+    </figure>
+  </div>
+  <ul class="stats">
+    <li class="rv"><span class="num" data-to="7">7</span><small>systems built, from sensors to a prosthetic arm</small></li>
+    <li class="rv" style="--d:.1s"><span class="num" data-to="3">3</span><small>competition wins across 2022 and 2024</small></li>
+    <li class="rv" style="--d:.2s"><span class="num" data-to="10" data-pre="Top ">Top 10</span><small>nationally, Samsung Solve for Tomorrow 2024</small></li>
+    
+  </ul>
+</header>
+
+<div class="wave" aria-hidden="true"></div>
+
+<section class="sec wrap" id="work">
+  <h2 class="rv">Every project is a function</h2>
+  <p class="intro rv">Each build takes a real problem as its input and returns something measurable. Hover a card to speed up its curve. The curves illustrate the idea; they are not project data.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="sec wrap" id="lab">
+  <h2 class="rv">Where maths meets machines</h2>
+  <p class="intro rv">I like computers at every level, from a soldering iron to a trained model. Maths is how I make them useful: every sensor I use turns a smooth signal into numbers a computer can store.</p>
+  <div class="labgrid">
+    <div class="stage term rv"><div class="bar"><i></i><i></i><i></i><span>mrinmoy@shillong: ~</span></div><pre><span style="--k:0"><b>$</b> neofetch</span><span style="--k:1"><em>OS</em>Arch Linux</span><span style="--k:2"><em>Boards</em>Raspberry Pi, flex sensors, IMUs</span><span style="--k:3"><em>Code</em>Python, C++</span><span style="--k:4"><em>Vision</em>OpenCV</span><span style="--k:5"><em>Phones</em>ADB and Fastboot</span><span style="--k:6"><em>Virtual</em>VirtualBox passthrough</span><span style="--k:7"><em>Repair</em>soldering, boot-pin recovery</span><span style="--k:8"><em>Workshop</em>IBM Z-Frame, open source</span><span style="--k:9"><b>$</b> python adc.py <u class="car"></u></span></pre></div>
+    <div class="stage rv" style="--d:.12s"><div class="bar"><i></i><i></i><i></i><span>adc.py</span></div><canvas id="adc" role="img" aria-label="A smooth wave sampled into 3-bit numbers"></canvas><div class="bits" id="bits"></div><label class="ctl" for="sr">samples = <input id="sr" type="range" min="4" max="48" value="16"><output id="srout" for="sr">16</output></label></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="recognition">
+  <h2 class="rv">Recognition</h2>
+  <article class="feat rv"><div><span class="tag">Finalist</span><h3>National Top 10</h3><p>Samsung Solve for Tomorrow 2024</p></div><div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+  <div class="ach">
+    
+    <article class="bd rv" style="--d:.08s"><span class="yw" aria-hidden="true">2024</span><span class="tag w">Winner</span><h3>CBSE Regional Science Exhibition</h3><p>2024</p></article>
+    <article class="bd rv" style="--d:.16s"><span class="yw" aria-hidden="true">2024</span><span class="tag w">Winner</span><h3>Meghalaya State Science Exhibition</h3><p>2024</p></article>
+    <article class="bd rv" style="--d:.24s"><span class="yw" aria-hidden="true">2022</span><span class="tag w">Winner</span><h3>Physics Olympiad (NEHU)</h3><p>2022</p></article>
+    
+    <article class="bd rv" style="--d:.08s"><span class="yw" aria-hidden="true">∫</span><span class="tag p">Presented</span><h3>Beyond Boundaries Initiative</h3><p>Recognition for social-impact technology</p></article>
+    <article class="bd rv" style="--d:.16s"><span class="yw" aria-hidden="true">Σ</span><span class="tag p">Pitched</span><h3>Assistive AI-robotics concepts</h3><p>To stakeholders, with project-level fundraising exposure</p></article>
+  </div>
+  <p class="also rv"><b>Also:</b> exhibited at the CBSE National Science Exhibition 2024, was selected for the National Startup Innovation Contest, and attended an IBM workshop on Z-Frame architecture and open-source programming.</p>
+</section>
+
+<section class="sec wrap" id="toolkit">
+  <h2 class="rv">Toolkit</h2>
+  <div class="kit">
+    <div class="rv"><h3>Build</h3><ul class="chips"><li class="chip">Python</li><li class="chip">C++</li><li class="chip">OpenCV</li><li class="chip">Machine learning</li><li class="chip">Computer vision</li><li class="chip">Model deployment</li><li class="chip">Raspberry Pi OS</li><li class="chip">Linux (Arch)</li><li class="chip">ADB and Fastboot</li><li class="chip">VirtualBox passthrough</li><li class="chip">Hardware interfacing</li><li class="chip">Soldering</li><li class="chip">Boot-pin recovery</li><li class="chip">Robotics prototyping</li></ul></div>
+    <div class="rv" style="--d:.1s"><h3>Analyse</h3><ul class="chips"><li class="chip">Sensor data interpretation</li><li class="chip">Seismic and flood patterns</li><li class="chip">Predictive modelling</li><li class="chip">Traffic forecasting</li><li class="chip">Impact measurement</li><li class="chip">Circuit resilience testing</li></ul></div>
+    <div class="rv" style="--d:.2s"><h3>Communicate</h3><ul class="chips"><li class="chip">Leadership</li><li class="chip">Pitching</li><li class="chip">Stakeholder presentations</li><li class="chip">User-centric design</li><li class="chip">Rapid prototyping</li></ul></div>
+  </div>
+  <p class="bg2 rv"><b>Studying:</b> B.Tech, first year, SRM Institute of Science and Technology. <b>School:</b> Army Public School, Shillong (Class 12: 84%, Class 10: 96%). <b>Languages:</b> English (C2), Hindi (B2).</p>
+</section>
+
+<div class="wave" aria-hidden="true"></div>
+
+<section class="sec wrap" id="contact">
+  <div class="contact">
+    <div class="rv">
+      <h2>Have a problem a sensor, a camera or a model could help with?</h2>
+      <p>I’m happy to talk about assistive technology, hazard monitoring and anything else that can be measured, built and tested.</p>
+      <a class="mail" href="mailto:mrinmoybhattacharjee145@gmail.com">mrinmoybhattacharjee145@gmail.com</a>
+    </div>
+    <div class="rv" style="--d:.15s">
+      <svg class="euler" viewBox="0 0 160 160" role="img" aria-label="A point travelling around the unit circle">
+        <circle class="ax" cx="80" cy="80" r="60"/><path class="ax" d="M4 80H156M80 4V156"/>
+        <g class="spin"><line class="rad" x1="80" y1="80" x2="140" y2="80"/><circle class="pt" cx="140" cy="80" r="6"/></g>
+      </svg>
+      <p class="fm"><i>e</i><sup><i>iθ</i></sup> = cos <i>θ</i> + <i>i</i> sin <i>θ</i></p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><span>Mrinmoy Bhattacharjee, Shillong</span><span><i>e</i><sup><i>iπ</i></sup> + 1 = 0</span></div></footer>
+
+<script>
+(()=>{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,dpr=Math.min(devicePixelRatio||1,2);
+const C={};
+const rc=()=>{const s=getComputedStyle(document.documentElement);["bg","surface","ink","mute","a1","a2","a3","line"].forEach(k=>C[k]=s.getPropertyValue("--"+k).trim())};
+rc();
+const fit=cv=>{const w=cv.clientWidth,h=cv.clientHeight,W=Math.round(w*dpr),H=Math.round(h*dpr);if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}const x=cv.getContext("2d");x.setTransform(dpr,0,0,dpr,0,0);return[x,w,h]};
+
+/* headings get an animated sine squiggle */
+const SQ='<svg class="sq rv" viewBox="0 0 160 12" aria-hidden="true"><path pathLength="1" d="M0 6Q10-2 20 6T40 6 60 6 80 6 100 6 120 6 140 6 160 6"/></svg>';
+$$("h2").forEach(h=>h.insertAdjacentHTML("afterend",SQ));
+
+/* projects as functions */
+const P=[
+{t:"EMP generator",a:"electromagnetic interference",r:"hardware resilience testing",d:"Built to understand how EM interference hits circuits and how well hardware survives it.",f:(s,t)=>{const u=((s-t*.3%1)+1)%1;return Math.exp(-6*u)*Math.sin(u*70)}},
+{t:"Flood monitoring robot",a:"manual water tracking",r:"early hazard alerts",d:"A robot that takes over water-level tracking so warnings can come earlier.",fill:1,f:(s,t)=>-.55+.9*((t*.1)%1)+.12*Math.sin(s*14+t*3)},
+{t:"Gesture recognition glove",a:"multiple disability issues",r:"assistive feedback accuracy",d:"Flex sensors and IMU modules read hand gestures and turn them into assistive feedback.",k:5,f:(s,t,j)=>.55*Math.sin(s*5+t*1.4+j*.8)*(1-j*.12)},
+{t:"Computer-vision prosthetic arm",a:"hand motion",r:"assistive robotics feasibility",d:"A prototype that uses computer vision to map hand motion onto a prosthetic arm.",k:2,f:(s,t,j)=>.6*Math.sin(s*6+t*2-j*.9)},
+{t:"ML traffic light",a:"congestion prediction",r:"less idle time",d:"An automatic signal at Army Public School, 101 Area, that predicts congestion to cut idling.",k:2,f:(s,t,j)=>{const p=((s*3+t*.25-j*.07)%1+1)%1;return(p<.7?p/.7:1-(p-.7)/.3)*1.1-.55}},
+{t:"Soil-quality assessment system",a:"slow manual testing",r:"faster farm insights",d:"An autonomous system that assesses soil quality in place of slow manual tests.",f:(s,t)=>.5*Math.sin(s*6)+.4*Math.sin(s*45+t*3)*(.5+.5*Math.sin(t*.8))},
+{t:"Kratos",a:"hesitation to share sensitive issues",r:"safe disclosure",d:"A confidential health AI with text and voice, speech-to-text and text-to-speech, built so people can speak openly.",f:(s,t)=>Math.sin(s*Math.PI)*Math.sin(s*50+t*6)*(.4+.6*Math.abs(Math.sin(s*7+t*1.7)))}
+];
+$("#grid").innerHTML=P.map((p,i)=>`<article class="card rv" data-i="${i}" style="--d:${(i%2)*.1}s"><canvas class="plot" aria-hidden="true"></canvas><h3>${p.t}</h3><p class="sig"><b>def</b> f(<span class="arg">${p.a.replace(/ /g,"_")}</span>):<br>&nbsp;&nbsp;return <span class="res">${p.r.replace(/ /g,"_")}</span></p><p>${p.d}</p></article>`).join("");
+const po=new IntersectionObserver(es=>es.forEach(e=>P[+e.target.dataset.i].vis=e.isIntersecting));
+$$(".card").forEach((el,i)=>{const p=P[i];p.k=p.k||1;p.cv=$("canvas",el);p.T=0;p.sp=1;p.tg=1;p.vis=false;el.onpointerenter=()=>p.tg=3.5;el.onpointerleave=()=>p.tg=1;po.observe(el)});
+function plots(dt){P.forEach((p,i)=>{if(!p.vis&&!reduce)return;p.sp+=(p.tg-p.sp)*.1;p.T+=dt*p.sp;const[x,w,h]=fit(p.cv);x.clearRect(0,0,w,h);x.strokeStyle=C.line;x.lineWidth=1;x.beginPath();x.moveTo(0,h/2);x.lineTo(w,h/2);x.stroke();const col=C[["a1","a3","a2"][i%3]],N=Math.max(2,w/2|0);
+for(let j=0;j<p.k;j++){x.beginPath();for(let n=0;n<=N;n++){const s=n/N,y=h/2-p.f(s,p.T+3,j)*h*.38;n?x.lineTo(s*w,y):x.moveTo(0,y)}
+x.strokeStyle=col;x.globalAlpha=j?.35:1;x.lineWidth=2;x.stroke();
+if(p.fill&&!j){x.lineTo(w,h);x.lineTo(0,h);x.closePath();x.globalAlpha=.15;x.fillStyle=col;x.fill()}}
+x.globalAlpha=1})}
+
+/* background: drifting symbols that scatter from the pointer, plus a chalk trail */
+const bc=$("#bg"),SY=["π","∑","∫","√","∞","θ","λ","Δ","∂","φ","∇","≈","ℝ","∮","e","i","ε","σ","μ","ζ","{ }","</>","01","10","&&","=>","#","0x"];
+const M={x:-999,y:-999},tr=[];
+const sy=SY.map((ch,i)=>({ch,x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.25,vy:-.1-Math.random()*.25,s:22+Math.random()*44,r:Math.random()*6,vr:(Math.random()-.5)*.003,c:["a1","a2","a3","ink"][i%4],m:i>19}));
+addEventListener("pointermove",e=>{M.x=e.clientX;M.y=e.clientY;if(!reduce){tr.push({x:M.x,y:M.y,l:1});if(tr.length>50)tr.shift()}},{passive:true});
+function bg(dt){const[x,w,h]=fit(bc);x.clearRect(0,0,w,h);x.textAlign="center";x.textBaseline="middle";
+for(const s of sy){const dx=s.x-M.x,dy=s.y-M.y,d=Math.hypot(dx,dy);if(d<150&&d>1){s.x+=dx/d*(150-d)*.04;s.y+=dy/d*(150-d)*.04}
+s.x+=s.vx*dt*60;s.y+=s.vy*dt*60;s.r+=s.vr*dt*60;if(s.y<-60)s.y=h+60;if(s.x<-60)s.x=w+60;if(s.x>w+60)s.x=-60;
+x.save();x.translate(s.x,s.y);x.rotate(s.r);x.globalAlpha=.2;x.fillStyle=C[s.c];x.font=s.m?`700 ${s.s*.8}px "JetBrains Mono",monospace`:`italic ${s.s}px "STIX Two Text",Georgia,serif`;x.fillText(s.ch,0,0);x.restore()}
+for(let i=tr.length-1;i>=0;i--){const q=tr[i];q.l-=dt*1.6;if(q.l<=0){tr.splice(i,1);continue}x.globalAlpha=q.l*.6;x.fillStyle=C.a1;x.beginPath();x.arc(q.x,q.y,q.l*4,0,7);x.fill()}
+x.globalAlpha=1}
+
+/* hero: epicycles */
+const ec=$("#epi"),E=[[1,100,0],[-2,30,.9],[3,24,1.7],[-5,16,2.6],[7,11,.4],[-8,8,3.1],[11,5,1.2],[-13,4,2.2]],W=E.map(()=>0);
+let nT=6;
+const tip=th=>{let X=0,Y=0;E.forEach((e,k)=>{const a=e[1]*W[k],p=e[0]*th+e[2];X+=a*Math.cos(p);Y+=a*Math.sin(p)});return[X,Y]};
+function epi(dt,T){const[x,w,h]=fit(ec);x.clearRect(0,0,w,h);const L=reduce?1:1-Math.exp(-dt*5);
+E.forEach((e,k)=>{W[k]+=((k<nT&&T>.3+k*.22?1:0)-W[k])*L});
+const sum=E.reduce((a,e,k)=>a+e[1]*W[k],0)||1,sc=Math.min(w,h)/2*.92/sum,cx=w/2,cy=h/2,th=T*.5,N=300,span=Math.PI*2*.9*Math.min(1,T/3.5),pts=[];
+for(let j=N;j>=0;j--){const[X,Y]=tip(th-span*j/N);pts.push([cx+X*sc,cy+Y*sc])}
+x.lineCap="round";x.lineJoin="round";x.lineWidth=2.4;x.strokeStyle=C.a1;
+for(let c=0;c<10;c++){x.globalAlpha=.12+.88*c/9;x.beginPath();const a=c*30;x.moveTo(pts[a][0],pts[a][1]);for(let i=a+1;i<=a+30&&i<pts.length;i++)x.lineTo(pts[i][0],pts[i][1]);x.stroke()}
+let px=cx,py=cy;x.lineWidth=1;
+E.forEach((e,k)=>{const r=e[1]*W[k]*sc;if(r<.6)return;const p=e[0]*th+e[2],nx=px+r*Math.cos(p),ny=py+r*Math.sin(p);
+x.strokeStyle=C.mute;x.globalAlpha=.35;x.beginPath();x.arc(px,py,r,0,7);x.stroke();
+x.globalAlpha=.7;x.strokeStyle=C.a3;x.beginPath();x.moveTo(px,py);x.lineTo(nx,ny);x.stroke();px=nx;py=ny});
+x.globalAlpha=.25;x.fillStyle=C.a2;x.beginPath();x.arc(px,py,11,0,7);x.fill();x.globalAlpha=1;x.beginPath();x.arc(px,py,5,0,7);x.fill();x.globalAlpha=1}
+$("#n").oninput=e=>{nT=+e.target.value;$("#nout").textContent=nT;if(reduce)requestAnimationFrame(loop)};
+
+/* typed equation */
+const q=$("#eq"),str="def f(problem): return prototype";let qi=0;
+if(reduce)q.textContent=str;else setTimeout(function ty(){q.textContent=str.slice(0,++qi);if(qi<str.length)setTimeout(ty,55)},1300);
+
+/* reveal + count-up */
+function count(n){const to=+n.dataset.to,pre=n.dataset.pre||"",suf=n.dataset.suf||"";if(reduce)return;const t0=performance.now();(function u(now){const p=Math.min(1,(now-t0)/1400),e=1-Math.pow(1-p,3);n.textContent=pre+Math.round(to*e)+suf;if(p<1)requestAnimationFrame(u)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");$$(".num",e.target).forEach(count);io.unobserve(e.target)}),{threshold:.15,rootMargin:"0px 0px -6% 0px"});
+$$(".rv").forEach(el=>io.observe(el));
+
+/* scroll progress */
+const pb=$("#pg");
+addEventListener("scroll",()=>{const m=document.documentElement.scrollHeight-innerHeight;pb.style.transform=`scaleX(${m>0?scrollY/m:0})`},{passive:true});
+
+/* signal to bits */
+const ac=$("#adc"),bt=$("#bits");let ns=16;
+$("#sr").oninput=e=>{ns=+e.target.value;$("#srout").textContent=ns;if(reduce)requestAnimationFrame(loop)};
+function adc(T){const[x,w,h]=fit(ac),m=20,ph=T*1.1,f=s=>.6*Math.sin(s*12.6+ph)+.25*Math.sin(s*28-ph*1.7),Y=v=>h/2-v*(h/2-m)/.9;
+x.clearRect(0,0,w,h);x.lineWidth=1;x.strokeStyle=C.line;
+for(let k=0;k<8;k++){const y=Y(-.9+1.8*k/7);x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke()}
+x.lineWidth=2;x.strokeStyle=C.a3;x.beginPath();for(let i=0;i<=w;i+=3){const y=Y(f(i/w));i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke();
+const ks=[];x.strokeStyle=C.a1;x.lineWidth=1.5;x.beginPath();
+for(let i=0;i<ns;i++){const s=(i+.5)/ns,k=Math.round((f(s)+.9)/1.8*7),y=Y(-.9+1.8*k/7);ks.push(k);x.moveTo(i/ns*w,y);x.lineTo((i+1)/ns*w,y)}x.stroke();
+x.fillStyle=C.a2;ks.forEach((k,i)=>{x.beginPath();x.arc((i+.5)/ns*w,Y(-.9+1.8*k/7),3.5,0,7);x.fill()});
+const key=Math.floor(T*10)+"-"+ns;if(key!==adc.k){adc.k=key;bt.textContent=ks.map(k=>k.toString(2).padStart(3,"0")).join(" ")}}
+$$(".meter i").forEach((e,i)=>e.style.setProperty("--n",i));
+$$(".bd").forEach(el=>el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--mx",e.clientX-r.left+"px");el.style.setProperty("--my",e.clientY-r.top+"px")}));
+
+/* one loop drives everything */
+let last=performance.now(),T=reduce?10:0,fr=0;
+function loop(now){const dt=reduce?0:Math.min(.05,(now-last)/1e3);last=now;T+=dt;if(++fr%60==0)rc();bg(dt);epi(dt,T);plots(dt);adc(T);if(!reduce)requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+if(reduce)setTimeout(()=>requestAnimationFrame(loop),400);
+})();
+</script>
+</body>
+</html>
